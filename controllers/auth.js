@@ -39,7 +39,7 @@ const register = async (req, res) => {
   // response
   const token = generateToken(user._id, user.isAdmin);
   const { password: hashed, ...userDoc } = user._doc;
-  res.status(201).json({ token, ...userDoc });
+  res.status(201).json({ token, data: userDoc });
 };
 
 const login = async (req, res) => {
@@ -68,7 +68,7 @@ const login = async (req, res) => {
   // response
   const token = generateToken(user._id, user.isAdmin);
   const { password: hashed, ...userDoc } = user._doc;
-  res.status(200).json({ token, ...userDoc });
+  res.status(200).json({ token, data: userDoc });
 };
 
 module.exports = {

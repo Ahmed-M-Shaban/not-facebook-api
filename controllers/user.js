@@ -8,30 +8,18 @@ const updateUser = async (req, res, next) => {
     req.body.password = await bcrypt.hash(req.body.password, 10);
   }
 
-  const {
-    username,
-    email,
-    password,
-    profilePicture,
-    coverPicture,
-    desc,
-    city,
-    from,
-    relationship,
-  } = req.body;
-
   const user = await User.findByIdAndUpdate(
     req.userId,
     {
-      username,
-      email,
-      password,
-      profilePicture,
-      coverPicture,
-      desc,
-      city,
-      from,
-      relationship,
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      profilePicture: req.body.profilePicture,
+      coverPicture: req.body.coverPicture,
+      desc: req.body.desc,
+      city: req.body.city,
+      from: req.body.from,
+      relationship: req.body.relationship,
     },
     { new: true }
   );
@@ -57,7 +45,7 @@ const getUser = async (req, res, next) => {
     __v: 0,
     updatedAt: 0,
   });
-  res.status(200).json(user);
+  res.status(200).json({ data: user });
 };
 
 const followUser = async (req, res, next) => {
